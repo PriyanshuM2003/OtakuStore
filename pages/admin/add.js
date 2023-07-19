@@ -13,7 +13,7 @@ const Add = () => {
         if (!localStorage.getItem('admin')) {
             router.push('/')
         }
-    }, [])
+    }, [router])
     return (
         <>
             <ThemeProvider theme={theme}>

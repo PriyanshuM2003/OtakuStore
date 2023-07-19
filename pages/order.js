@@ -18,7 +18,7 @@ const MyOrder = ({ order, clearCart }) => {
     if (router.query.clearCart == 1) {
       clearCart()
     }
-  }, [])
+  }, [clearCart, order.createdAt, router.query.clearCart])
 
 
   return (
@@ -59,7 +59,7 @@ const MyOrder = ({ order, clearCart }) => {
                       {Object.keys(products).map((Key) => {
                         return <tr key={Key} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                           <td className="p-4 w-32">
-                            <img src={products[Key].img} alt="" />
+                            <img src={products[Key].img} alt={products[Key].name} />
                           </td>
                           <td className="py-4 px-6 font-semibold text-purple-800 dark:text-white">
                             {products[Key].name}

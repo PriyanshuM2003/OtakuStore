@@ -19,7 +19,7 @@ const Signup = () => {
     if (localStorage.getItem('myuser')) {
       router.push('/')
     }
-  }, [])
+  }, [router])
 
   const handleChange = async (e) => {
     if (e.target.name == 'name') {
@@ -100,7 +100,7 @@ const Signup = () => {
                       <label className="block appearance-none uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="phone">
                         Phone Number
                       </label>
-                      <input onChange={handleChange} maxlength="10" pattern="\d{10}" value={phone} required name="phone" className="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" type="text" placeholder='Please enter your 10 digit mobile no.' />
+                      <input onChange={handleChange} maxLength="10" pattern="\d{10}" value={phone} required name="phone" className="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="phone" type="text" placeholder='Please enter your 10 digit mobile no.' />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-6">

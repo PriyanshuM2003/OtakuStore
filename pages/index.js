@@ -14,7 +14,7 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          <Image className={styles.mainImg} src="/Picture2.jpg" width={1519} height={665} layout='raw' />
+          <Image className={styles.mainImg} src="/Picture2.jpg" width={1519} height={665} layout='raw' alt="Main Image" />
         </div>
         <section className={styles.contentBody}>
           <div className="container px-5 py-16 mx-auto">

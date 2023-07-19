@@ -26,7 +26,7 @@ const Navbar = ({ user, admin, logout, adminLogout, cart, addToCart, removeFromC
     if (exempted.includes(router.pathname)) {
       setSidebar(false)
     }
-  }, [])
+  }, [cart, router.pathname])
 
   const [searchQuery, setSearchQuery] = useState('');
 

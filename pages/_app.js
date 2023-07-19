@@ -15,75 +15,6 @@ function MyApp({ Component, pageProps }) {
   const [progress, setProgress] = useState(0)
   const router = useRouter()
 
-  useEffect(() => {
-    router.events.on('routeChangeStart', () => {
-      setProgress(35)
-    })
-    router.events.on('routeChangeComplete', () => {
-      setProgress(100)
-    })
-    try {
-      if (localStorage.getItem("cart")) {
-        setCart(JSON.parse(localStorage.getItem("cart")))
-        saveCart(JSON.parse(localStorage.getItem("cart")))
-      }
-    } catch (error) {
-      localStorage.clear
-    }
-    const myuser = JSON.parse(localStorage.getItem('myuser'))
-    if (myuser) {
-      const currentTime = Math.floor(Date.now() / 1000);
-      if (currentTime >= myuser.expirationTimestamp) {
-        logout();
-        toast.error('Your session has expired. Please log in again.', {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      } else {
-        setUser({ value: myuser.token, email: myuser.email, name: myuser.name, phone: myuser.phone });
-        const timeToExpiration = myuser.expirationTimestamp - currentTime;
-        setTimeout(checkTokenExpiration, timeToExpiration * 1000);
-      }
-    }
-    setKey(Math.random())
-  }, [router.query])
-
-  useEffect(() => {
-    router.events.on('routeChangeStart', () => {
-      setProgress(35)
-    })
-    router.events.on('routeChangeComplete', () => {
-      setProgress(100)
-    })
-    const admin = JSON.parse(localStorage.getItem('admin'))
-    if (admin) {
-      const currentTime = Math.floor(Date.now() / 1000);
-      if (currentTime >= admin.expirationTimestamp) {
-        adminLogout();
-        toast.error('Your session has expired. Please log in again.', {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      } else {
-        setAdmin({ value: admin.token, email: admin.email, name: admin.name, phone: admin.phone });
-        const timeToExpiration = admin.expirationTimestamp - currentTime;
-        setTimeout(checkAdminTokenExpiration, timeToExpiration * 1000);
-      }
-    }
-    setKey(Math.random())
-  }, [router.query])
-
-
   const checkTokenExpiration = () => {
     const myuser = JSON.parse(localStorage.getItem('myuser'));
     if (myuser && myuser.expirationTimestamp) {
@@ -199,6 +130,74 @@ function MyApp({ Component, pageProps }) {
     setCart(newCart)
     saveCart(newCart)
   }
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', () => {
+      setProgress(35)
+    })
+    router.events.on('routeChangeComplete', () => {
+      setProgress(100)
+    })
+    try {
+      if (localStorage.getItem("cart")) {
+        setCart(JSON.parse(localStorage.getItem("cart")))
+        saveCart(JSON.parse(localStorage.getItem("cart")))
+      }
+    } catch (error) {
+      localStorage.clear
+    }
+    const myuser = JSON.parse(localStorage.getItem('myuser'))
+    if (myuser) {
+      const currentTime = Math.floor(Date.now() / 1000);
+      if (currentTime >= myuser.expirationTimestamp) {
+        logout();
+        toast.error('Your session has expired. Please log in again.', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        setUser({ value: myuser.token, email: myuser.email, name: myuser.name, phone: myuser.phone });
+        const timeToExpiration = myuser.expirationTimestamp - currentTime;
+        setTimeout(checkTokenExpiration, timeToExpiration * 1000);
+      }
+    }
+    setKey(Math.random())
+  }, [router.query, checkTokenExpiration, logout])
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', () => {
+      setProgress(35)
+    })
+    router.events.on('routeChangeComplete', () => {
+      setProgress(100)
+    })
+    const admin = JSON.parse(localStorage.getItem('admin'))
+    if (admin) {
+      const currentTime = Math.floor(Date.now() / 1000);
+      if (currentTime >= admin.expirationTimestamp) {
+        adminLogout();
+        toast.error('Your session has expired. Please log in again.', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        setAdmin({ value: admin.token, email: admin.email, name: admin.name, phone: admin.phone });
+        const timeToExpiration = admin.expirationTimestamp - currentTime;
+        setTimeout(checkAdminTokenExpiration, timeToExpiration * 1000);
+      }
+    }
+    setKey(Math.random())
+  }, [router.query, adminLogout, checkAdminTokenExpiration])
 
   return <>
     <LoadingBar

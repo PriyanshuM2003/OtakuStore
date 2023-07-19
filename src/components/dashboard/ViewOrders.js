@@ -23,7 +23,7 @@ const ViewOrders = ({ orders, currentPage, itemsPerPage }) => {
   useEffect(() => {
     const orderDates = currentOrders.map((order) => new Date(order.createdAt));
     setDates(orderDates);
-  }, []);
+  }, [currentOrders]);
 
 
   return (
@@ -123,7 +123,7 @@ const ViewOrders = ({ orders, currentPage, itemsPerPage }) => {
                         fontWeight: "500",
                       }}
                       className="flex flex-col justify-center items-center" variant="h6">
-                      <img className="mr-4" style={{ height: '3rem' }} src={product.img} />
+                      <img className="mr-4" style={{ height: '3rem' }} src={product.img} alt={product.name} />
                       {product.name}
                     </Typography>
                   </TableCell>

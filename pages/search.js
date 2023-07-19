@@ -17,12 +17,12 @@ const SearchPage = ({ products }) => {
                                 return <Link key={products[item]._id} passHref={true} href={`/product/${products[item].slug}`}>
                                     <div>
                                         <Head>
-                                            <title>OtakuStore- Search=${products[item].tags}</title>
+                                            <title>{`OtakuStore- Search=${products[item].tags}`}</title>
                                             <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
                                         </Head>
                                         <h1 className="text-2xl text-center py-4 md:flex md:items-baseline justify-between inline-block border-b border-gray-200 pb-4">Search results for:&nbsp;
                                             <span className="text-purple-600 font-semibold">
-                                                "{products[item].tags}"
+                                                {`"${products[item].tags}"`}
                                             </span>
                                         </h1>
                                         <div className="lg:w-52 md:w-1/2 p-4
