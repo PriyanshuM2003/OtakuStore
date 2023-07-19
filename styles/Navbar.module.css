@@ -1,0 +1,19 @@
+.headContainer {
+    background: linear-gradient(to right, #bb154c, #381574);
+    /* background: linear-gradient(to right, #e91e63, #673ab7); */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    /* #ffe838, #fd57bf */
+    /* #e91e63, #673ab7 */
+    font-family: 'Sigmar One', cursive;
+}
+
+.navbar {
+    color: #eee;
+}
+
+.Cart {
+    background: linear-gradient(to top, #e91e63, #673ab7);
+}

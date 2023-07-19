@@ -1,0 +1,8 @@
+.FooterH1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(to top, #fd57bf, #ffe838);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Sigmar One', cursive;
+}
