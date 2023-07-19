@@ -16,7 +16,7 @@ export default function Index() {
         if (!localStorage.getItem('admin')) {
             router.push('/')
         }
-    }, [router])
+    }, [])
 
     return (
         <ThemeProvider theme={theme}>

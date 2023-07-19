@@ -20,7 +20,7 @@ const Orders = ({ order }) => {
     if (!localStorage.getItem('admin')) {
       router.push('/')
     }
-  }, [router])
+  }, [])
 
 
   return (

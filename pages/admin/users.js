@@ -19,7 +19,7 @@ const Users = ({ users }) => {
         if (!localStorage.getItem('admin')) {
             router.push('/')
         }
-    }, [router])
+    }, [])
 
     return (
         <>

@@ -39,7 +39,7 @@ const Orders = () => {
         } else {
             fetchOrders()
         }
-    }, [router])
+    }, [])
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;

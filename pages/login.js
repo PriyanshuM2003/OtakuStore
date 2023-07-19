@@ -24,7 +24,7 @@ const Login = () => {
     if (localStorage.getItem('myuser')) {
       router.push('/')
     }
-  }, [router]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault()

@@ -19,7 +19,7 @@ const Signup = () => {
     if (localStorage.getItem('myuser')) {
       router.push('/')
     }
-  }, [router])
+  }, [])
 
   const handleChange = async (e) => {
     if (e.target.name == 'name') {

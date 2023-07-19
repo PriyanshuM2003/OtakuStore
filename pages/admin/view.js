@@ -18,7 +18,7 @@ const View = ({ products }) => {
         if (!localStorage.getItem('admin')) {
             router.push('/')
         }
-    }, [router])
+    }, [])
 
     const updateProduct = async (updatedProducts) => {
         try {

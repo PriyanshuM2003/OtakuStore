@@ -141,7 +141,7 @@ const ViewProduct = ({ products, currentPage, itemsPerPage, updateProduct }) => 
                     fontWeight: "500",
                   }}
                   className="flex flex-row justify-start items-center" color="Textprimary" variant="h6">
-                  <img className="mr-4" style={{ height: '3rem' }} src={product.img} alt={product.name} />
+                  <img className="mr-4" style={{ height: '3rem' }} src={product.img} alt={product.title} />
                   <TextField
                     sx={{
                       width: "100%",

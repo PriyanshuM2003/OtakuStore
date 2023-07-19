@@ -23,7 +23,7 @@ const ViewOrders = ({ orders, currentPage, itemsPerPage }) => {
   useEffect(() => {
     const orderDates = currentOrders.map((order) => new Date(order.createdAt));
     setDates(orderDates);
-  }, [currentOrders]);
+  }, []);
 
 
   return (

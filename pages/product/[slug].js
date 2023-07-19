@@ -34,11 +34,11 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
       setSelectedColor(product.color);
       setSelectedSize(product.size);
     }
-  }, [router.query, error, product.color, product.size]);
+  }, [router.query]);
 
   useEffect(() => {
     refreshVariant(selectedColor, selectedSize);
-  }, [selectedColor, selectedSize, refreshVariant]);
+  }, [selectedColor]);
 
   const checkServiceAvail = async () => {
     let pinCodes = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)

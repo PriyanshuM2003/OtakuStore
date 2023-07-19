@@ -36,7 +36,7 @@ const MyAccount = () => {
             setCity(user.city)
             fetchData(user.token)
         }
-    }, [router])
+    }, [])
 
     const fetchData = async (token) => {
         let data = { token: token }

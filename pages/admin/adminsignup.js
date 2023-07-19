@@ -21,7 +21,7 @@ const AdminSignup = () => {
         if (localStorage.getItem('admin')) {
             router.push('/admin')
         }
-    }, [router])
+    }, [])
 
     const handleChange = async (e) => {
         if (e.target.name == 'Skey') {

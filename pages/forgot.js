@@ -15,7 +15,7 @@ const Forgot = () => {
     if (localStorage.getItem('myuser')) {
       router.push('/')
     }
-  }, [router])
+  }, [])
 
   const sendResetEmail = async () => {
     let data = {
