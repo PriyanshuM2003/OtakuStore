@@ -18,7 +18,7 @@ function Carousel() {
 
     const fetchImages = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getimages`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/getimages`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
