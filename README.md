@@ -6,5 +6,6 @@ dummy admin<br />
 id- admin@gmail.com , password- 123<br />
 ToDO-
 - [ ] Make forgot password.
+- [ ] Make Product Tracker after payment.
 - [ ] Make responsive for phone.
 - [ ] Add sales graphs and some other things in admin dashboard.
