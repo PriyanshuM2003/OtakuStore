@@ -5,10 +5,19 @@ function Carousel() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [hasLoadedImages, setHasLoadedImages] = useState(false);
 
     useEffect(() => {
         fetchImages();
     }, []);
+
+
+    useEffect(() => {
+        if (hasLoadedImages && !localStorage.getItem('refreshed')) {
+            localStorage.setItem('refreshed', true);
+            window.location.reload();
+        }
+    }, [hasLoadedImages]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -31,6 +40,7 @@ function Carousel() {
                 const data = await response.json();
                 setImages(data);
                 setIsLoading(false);
+                setHasLoadedImages(true);
             } else {
                 console.error("Error fetching images");
                 setIsLoading(false);
