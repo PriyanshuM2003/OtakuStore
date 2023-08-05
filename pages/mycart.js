@@ -160,7 +160,7 @@ const MyCart = ({ cart, addToCart, removeFromCart, subTotal }) => {
                                                             Size:
                                                             <p className="text-purple-900 text-xs title-font font-medium ml-1">{cart[k].size}</p>
                                                         </h1>
-                                                        {cart[k].variant !== "Standard" && cart[k].variant && (
+                                                        {cart[k].variant !== "Standard" && (
                                                             <h1 className="flex text-gray-500 text-xs title-font font-medium">
                                                                 Color:
                                                                 <p className="text-purple-900 text-xs title-font font-medium ml-1">{cart[k].variant}</p>

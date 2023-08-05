@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link'
 import Product from "../models/Product"
 import mongoose from "mongoose";
@@ -23,6 +23,7 @@ const Costumes = ({ products }) => {
     }
     return true;
   });
+
   const sortedProducts = filteredProducts.sort((a, b) => {
     if (sortBy === 'price-low-to-high') {
       return a.price - b.price;
@@ -31,6 +32,12 @@ const Costumes = ({ products }) => {
     }
     return 0;
   });
+
+  useEffect(() => {
+    if (sortBy === '') {
+      window.location.reload();
+    }
+  }, [sortBy]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -83,7 +90,7 @@ const Costumes = ({ products }) => {
                 return <Link key={currentItems[item]._id} passHref={true} href={`/product/${currentItems[item].slug}`}>
                   <div className="lg:w-1/5 md:w-1/2 p-4 w-full cursor-pointer hover:shadow-slate-300 shadow-lg m-3 hover:shadow-xl rounded-lg overflow-hidden">
                     <a className="block rounded overflow-hidden">
-                      <img alt="ecommerce" className="object-cover object-center w-full h-auto block" src={currentItems[item].img} />
+                      <img alt="ecommerce" className="object-cover object-center w-full h-60 block" src={currentItems[item].img} />
                     </a>
                     <div className="mt-4 text-center">
                       <h3 className="text-gray-800 text-xs tracking-widest title-font mb-1">{currentItems[item].category}</h3>

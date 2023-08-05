@@ -19,11 +19,23 @@ const ViewOrders = ({ orders, currentPage, itemsPerPage }) => {
     ? orders.slice(indexOfFirstItem, indexOfLastItem)
     : [];
 
-
   useEffect(() => {
     const orderDates = currentOrders.map((order) => new Date(order.createdAt));
-    setDates(orderDates);
-  }, []);
+
+    if (!datesAreEqual(orderDates, dates)) {
+      setDates(orderDates);
+    }
+  }, [currentPage, itemsPerPage, currentOrders, dates]);
+
+  const datesAreEqual = (dates1, dates2) => {
+    if (dates1.length !== dates2.length) return false;
+
+    for (let i = 0; i < dates1.length; i++) {
+      if (dates1[i].getTime() !== dates2[i].getTime()) return false;
+    }
+
+    return true;
+  };
 
 
   return (
@@ -71,92 +83,94 @@ const ViewOrders = ({ orders, currentPage, itemsPerPage }) => {
           </TableHead>
 
           <TableBody>
-            {currentOrders.length === 0 && (
+            {currentOrders.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={6} align="center">
                   <Typography variant="body1">No orders to display.</Typography>
                 </TableCell>
               </TableRow>
+            ) : (
+              currentOrders.map((order, index) => (
+                <TableRow key={order._id}>
+                  {Object.values(order.products).map((product, productIndex) => (
+                    <React.Fragment key={productIndex}>
+                      <TableCell>
+                        <Typography
+                          sx={{
+                            fontSize: "15px",
+                            fontWeight: "500",
+                          }}>
+                          {order.name}
+                          <br />
+                          {order.email}
+                          <br />
+                          {order.phone}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography
+                          sx={{
+                            fontSize: "15px",
+                            fontWeight: "500",
+                          }}>
+                          {order.order_id}
+                        </Typography>
+                        <h1 className=" flex text-xs title-font tracking-widest">
+                          Order placed on:{''}
+                          <p className="text-xs title-font text-green-600 tracking-widest">
+                            {dates[index] &&
+                              dates[index].toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric', })}
+                          </p>
+                        </h1>
+                        <h1 className=" flex text-xs title-font tracking-widest">
+                          Order Status:
+                          <p className="text-xs title-font text-green-600 tracking-widest">
+                            {order.status}
+                          </p>
+                        </h1>
+                      </TableCell>
+                      <TableCell>
+                        <Typography
+                          sx={{
+                            fontSize: "15px",
+                            fontWeight: "500",
+                          }}
+                          className="flex flex-col justify-center items-center" variant="h6">
+                          <img className="mr-4" style={{ height: '3rem' }} src={product.img} alt={product.name} />
+                          {product.name}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography sx={{
+                          fontSize: "15px",
+                          fontWeight: "500",
+                        }} color="textSecondary" variant="h6">
+                          {product.qty}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography
+                          sx={{
+                            fontSize: "15px",
+                            fontWeight: "500",
+                          }}
+                          color="textSecondary" variant="h6">
+                          {product.size} / {product.variant}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="right">
+                        <Typography
+                          sx={{
+                            fontSize: "15px",
+                            fontWeight: "500",
+                          }}
+                          variant="h6">₹{order.amount}</Typography>
+                      </TableCell>
+                    </React.Fragment>
+                  ))}
+                </TableRow>
+              ))
             )}
-            {currentOrders.map((order, index) => (
-              <TableRow key={order._id}>
-                {Object.values(order.products).map((product) => (<>
-                  <TableCell key={product}>
-                    <Typography
-                      sx={{
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}>
-                      {order.name}
-                      <br />
-                      {order.email}
-                      <br />
-                      {order.phone}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      sx={{
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}>
-                      {order.order_id}
-                    </Typography>
-                    <hq className=" flex text-xs title-font tracking-widest">
-                      Order placed on:{''}
-                      <p className="text-xs title-font text-green-600 tracking-widest">
-                        {dates[index] &&
-                          dates[index].toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric', })}
-                      </p>
-                    </hq>
-                    <h1 className=" flex text-xs title-font tracking-widest">
-                      Order Status:
-                      <p className="text-xs title-font text-green-600 tracking-widest">
-                        {order.status}
-                      </p>
-                    </h1>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      sx={{
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}
-                      className="flex flex-col justify-center items-center" variant="h6">
-                      <img className="mr-4" style={{ height: '3rem' }} src={product.img} alt={product.name} />
-                      {product.name}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography sx={{
-                      fontSize: "15px",
-                      fontWeight: "500",
-                    }} color="textSecondary" variant="h6">
-                      {product.qty}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      sx={{
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}
-                      color="textSecondary" variant="h6">
-                      {product.size} / {product.variant}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="right">
-                    <Typography
-                      sx={{
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}
-                      variant="h6">₹{order.amount}</Typography>
-                  </TableCell>
-                </>
-                ))}
-              </TableRow>
-            ))}
           </TableBody>
         </Table>
       </TableContainer>

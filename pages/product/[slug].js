@@ -90,14 +90,14 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
     <section className="min-h-screen text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-20 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap justify-center items-center">
-          <img alt="ecommerce" className="lg:w-2/5 w-full h-full object-cover object-top rounded" src={product.img} />
+          <img alt="ecommerce" className="lg:w-96 w-full h-auto object-cover object-top rounded" src={product.img} />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-700 tracking-widest">Otaku Store {product.category}</h2>
             <h1 className="text-purple-900 text-3xl title-font font-medium mb-1">{product.title}</h1>
             <h1 className="flex text-gray-500 text-base title-font font-medium">Size:
               <p className="text-purple-900 text-base title-font font-medium mx-1">{product.size}</p>
             </h1>
-            {product.category === "T-Shirt" && product.color && (
+            {product.color !== "Standard" && (
               <h1 className="flex text-gray-500 text-base title-font font-medium mb-1">
                 Color:
                 <p className="text-purple-900 text-base title-font font-medium mb-1 mx-1">{product.color}</p>
@@ -143,7 +143,7 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
               </span>
             </div> */}
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
-              {product.category === "T-Shirt" && (
+              {product.color !== "Standard" && (
                 <div className="flex">
                   <span className="mr-3">Color</span>
                   {Object.keys(variants).map((colorOption) => (

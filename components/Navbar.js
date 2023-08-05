@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { AiOutlineShoppingCart, AiOutlineClose, AiFillPlusCircle, AiFillMinusCircle, AiOutlineClear } from 'react-icons/ai';
-import { MdAccountCircle } from 'react-icons/md';
+import { MdAccountCircle, MdSearch } from 'react-icons/md';
 import { BsFillBagCheckFill, BsFillCartCheckFill } from 'react-icons/bs';
 import { BiLogIn } from 'react-icons/bi';
 import styles from '../styles/Navbar.module.css';
@@ -13,6 +13,9 @@ const Navbar = ({ user, admin, logout, adminLogout, cart, addToCart, removeFromC
 
   const [dropdown, setDropdown] = useState(false)
   const [sidebar, setSidebar] = useState(false)
+  const [showSearchForm, setShowSearchForm] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
   const ref = useRef()
   const router = useRouter()
 
@@ -28,7 +31,9 @@ const Navbar = ({ user, admin, logout, adminLogout, cart, addToCart, removeFromC
     }
   }, [])
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const toggleSearchForm = () => {
+    setShowSearchForm(!showSearchForm);
+  };
 
   const handleSearchQueryChange = (event) => {
     setSearchQuery(event.target.value);
@@ -75,6 +80,8 @@ const Navbar = ({ user, admin, logout, adminLogout, cart, addToCart, removeFromC
                 <a className="mr-5 md:mr-20 hover:text-yellow-400">Posters</a>
               </Link>
             </nav>
+
+
             {user.value && <button onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} className="Cart absolute right-16 top-2 mx-6 hover:text-yellow-400">
               <MdAccountCircle className='text-3xl' />
             </button>}
@@ -102,9 +109,11 @@ const Navbar = ({ user, admin, logout, adminLogout, cart, addToCart, removeFromC
                 </Link>
               </ul>
             </div>}
+
             {admin.value && !user.value && <Link href={'/admin'}>
               <button onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} className="Cart absolute right-16 mx-6 top-2 text-white font-semibold border-0 focus:outline-none rounded text-3xl hover:text-yellow-400"><RiAdminFill /></button>
             </Link>}
+
             {admin.value && !user.value && dropdown && <div onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} className="absolute right-20 top-9 mx-2 z-10 w-44 bg-purple-900 rounded">
               <ul className="py-1 text-sm text-white font-semibold dark:text-gray-200 cursor-pointer" aria-labelledby="dropdownDefault">
                 <Link href={'/admin'}>
@@ -141,7 +150,7 @@ const Navbar = ({ user, admin, logout, adminLogout, cart, addToCart, removeFromC
                           Size:
                           <p className="text-yellow-400 text-sm title-font font-medium ml-1">{cart[k].size}</p>
                         </h1>
-                        {cart[k].variant && cart[k].variant !== "Standard" && (
+                        {cart[k].variant !== "Standard" && (
                           <h1 className="flex text-gray-200 text-sm title-font font-medium mb-1">
                             Color:
                             <p className="text-yellow-400 text-sm title-font font-medium ml-1">{cart[k].variant}</p>
@@ -169,19 +178,26 @@ const Navbar = ({ user, admin, logout, adminLogout, cart, addToCart, removeFromC
                 )}
               </div>
             </div>
+            <MdSearch
+              className='text-4xl cursor-pointer hover:text-yellow-400 absolute right-52'
+              onClick={toggleSearchForm}
+            />
           </div>
         </div>
-        <form className='flex justify-center' onSubmit={handleSearchSubmit}>
-          <div className="absolute w-1/3 mx-auto mt-2">
-            <input type="search" id="search-dropdown"
-              value={searchQuery}
-              onChange={handleSearchQueryChange}
-              className="block p-2.5 w-full z-20 text-sm text-purple-900 bg-purple-100 border-l-purple-50 border-l-2 border rounded-full border-purple-300 focus:ring-purple-500 focus:border-purple-500 dark:bg-purple-700 dark:border-l-purple-700  dark:border-purple-600 dark:placeholder-purple-400 dark:text-white dark:focus:border-purple-500" placeholder="Search Products..." required />
-            <button type="submit" className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white hover:text-yellow-400 bg-purple-700 border border-purple-700 rounded-full hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
-              <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </button>
-          </div>
-        </form>
+
+        {showSearchForm && (
+          <form className='flex justify-center' onSubmit={handleSearchSubmit}>
+            <div className="absolute w-1/3 mx-auto mt-2">
+              <input type="search" id="search-dropdown"
+                value={searchQuery}
+                onChange={handleSearchQueryChange}
+                className="block p-2.5 w-full z-20 text-sm text-purple-900 bg-purple-100 border-l-purple-50 border-l-2 border rounded-full border-purple-300 focus:ring-purple-500 focus:border-purple-500 dark:bg-purple-700 dark:border-l-purple-700  dark:border-purple-600 dark:placeholder-purple-400 dark:text-white dark:focus:border-purple-500" placeholder="Search Products..." required />
+              <button type="submit" className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white hover:text-yellow-400 bg-purple-700 border border-purple-700 rounded-full hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </button>
+            </div>
+          </form>
+        )}
       </header >
     </>
   )

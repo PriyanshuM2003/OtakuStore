@@ -11,15 +11,20 @@ import { useEffect } from "react";
 import Router from 'next/router';
 
 const Users = ({ users }) => {
+    
     const [currentPage, setCurrentPage] = useState(1);
     const usersPerPage = 10;
-
     const router = Router
+
     useEffect(() => {
         if (!localStorage.getItem('admin')) {
             router.push('/')
         }
     }, [])
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [currentPage]);
 
     return (
         <>
@@ -39,7 +44,7 @@ const Users = ({ users }) => {
                         </Grid>
                     </Grid>
                     <Grid container spacing={0}>
-                        <Grid item xs={12} lg={12}>
+                        <Grid item xs={12} lg={12} display='flex' justifyContent="center">
                             <BaseCard >
                                 <Stack spacing={2}>
                                     <Pagination

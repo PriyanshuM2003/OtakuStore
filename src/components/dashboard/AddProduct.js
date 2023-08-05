@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import {
     Stack,
     TextField,
@@ -8,6 +7,8 @@ import {
     FormControlLabel,
     FormLabel,
     Button,
+    Chip,
+    Box,
 } from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
 
@@ -23,6 +24,8 @@ const AddProduct = () => {
         img: '',
         price: '',
         availableQty: '',
+        tags: [],
+        newTag: '',
     });
 
     const handleChange = (event) => {
@@ -73,7 +76,41 @@ const AddProduct = () => {
                 [name]: checked,
             }));
         }
+
+        if (name === 'tags') {
+            setForm((prevForm) => ({
+                ...prevForm,
+                newTag: '',
+                tags: event.target.value
+                    .split(',')
+                    .map((tag) => tag.trim())
+                    .filter((tag) => tag !== '')
+            }));
+        } else {
+            setForm((prevForm) => ({
+                ...prevForm,
+                [name]: value,
+            }));
+        }
     };
+
+    const handleTagDelete = (tagToDelete) => () => {
+        setForm((prevForm) => ({
+            ...prevForm,
+            tags: prevForm.tags.filter((tag) => tag !== tagToDelete),
+        }));
+    };
+
+    const handleTagAdd = (event) => {
+        if (event.key === 'Enter' && event.target.value.trim() !== '') {
+            setForm((prevForm) => ({
+                ...prevForm,
+                tags: [...prevForm.tags, event.target.value.trim()],
+            }));
+            event.target.value = '';
+        }
+    };
+
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -426,8 +463,35 @@ const AddProduct = () => {
                     </FormGroup>
                     <TextField value={form.img}
                         onChange={handleInputChange} name="img" label="Image URL" variant="outlined" />
-                    <TextField value={form.tags}
-                        onChange={handleInputChange} name="tags" label="Tags" variant="outlined" />
+                    <TextField
+                        value={form.newTag}
+                        onChange={handleChange}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter' && event.target.value.trim() !== '') {
+                                setForm((prevForm) => ({
+                                    ...prevForm,
+                                    newTag: '',
+                                    tags: [...prevForm.tags, event.target.value.trim()],
+                                }));
+                            }
+                        }}
+                        name="newTag"
+                        label="Add Tags"
+                        variant="outlined"
+                        helperText="Press Enter to add a tag"
+                    />
+                    <Box>
+                        {form.tags.map((tag) => (
+                            <Chip
+                                key={tag}
+                                label={tag}
+                                onDelete={handleTagDelete(tag)}
+                                variant="outlined"
+                                color="primary"
+                                style={{ marginRight: '4px', marginBottom:'4px' }}
+                            />
+                        ))}
+                    </Box>
                     <TextField value={form.slug}
                         onChange={handleInputChange} name="slug" label="Slug" variant="outlined" />
                     <TextField
@@ -451,6 +515,7 @@ const AddProduct = () => {
                             name="availableQty"
                             label="Quantity"
                             variant="outlined"
+                            style={{ marginLeft: '8px' }}
                             value={form.availableQty}
                             onChange={handleInputChange}
                         />

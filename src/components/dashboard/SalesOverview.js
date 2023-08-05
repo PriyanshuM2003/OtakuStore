@@ -1,10 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import dynamic from "next/dynamic";
-import BaseCard from "../baseCard/BaseCard";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-const SalesOverview = () => {
+const SalesOverview = ({ orders }) => {
+  const [salesData, setSalesData] = useState([]);
+
+  useEffect(() => {
+    const salesSummary = calculateSalesSummary(orders);
+    setSalesData(salesSummary);
+  }, [orders]);
+
+  const calculateSalesSummary = (orders) => {
+    const salesSummary = {};
+    orders.forEach((order) => {
+      const date = new Date(order.createdAt);
+      const yearMonthKey = `${date.getFullYear()}-${date.getMonth() + 1}`;
+      if (!salesSummary[yearMonthKey]) {
+        salesSummary[yearMonthKey] = {
+          month: date.toLocaleString("default", { month: "short" }),
+          year: date.getFullYear(),
+          totalAmount: 0,
+          ordersCount: 0,
+        };
+      }
+      salesSummary[yearMonthKey].totalAmount += order.amount;
+      salesSummary[yearMonthKey].ordersCount++;
+    });
+    return Object.values(salesSummary);
+  };
+
+  const getMonthIndex = (monthName) => {
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return monthNames.indexOf(monthName);
+  };
+
+  const sortedSalesData = salesData.sort((a, b) => {
+    const yearComparison = a.year - b.year;
+    if (yearComparison !== 0) {
+      return yearComparison;
+    }
+    return getMonthIndex(a.month) - getMonthIndex(b.month);
+  });
+
+  const xAxisCategories = sortedSalesData.map((item) => `${item.month} ${item.year}`);
+
+  const maxTotalAmount = Math.max(...salesData.map((item) => item.totalAmount));
+  const maxOrdersCount = Math.max(...salesData.map((item) => item.ordersCount));
+  const maxYAxisValue = Math.max(maxTotalAmount, maxOrdersCount);
+
   const optionssalesoverview = {
     grid: {
       show: true,
@@ -24,7 +68,6 @@ const SalesOverview = () => {
         borderRadius: 5,
       },
     },
-
     colors: ["#fb9678", "#03c9d7"],
     fill: {
       type: "solid",
@@ -52,20 +95,7 @@ const SalesOverview = () => {
     },
     xaxis: {
       type: "category",
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "July",
-        "Aug",
-        "Sept",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
+      categories: xAxisCategories,
       labels: {
         style: {
           cssClass: "grey--text lighten-2--text fill-color",
@@ -74,9 +104,9 @@ const SalesOverview = () => {
     },
     yaxis: {
       show: true,
-      min: 100,
-      max: 400,
-      tickAmount: 3,
+      min: 0,
+      max: maxYAxisValue,
+      tickAmount: 10,
       labels: {
         style: {
           cssClass: "grey--text lighten-2--text fill-color",
@@ -93,25 +123,34 @@ const SalesOverview = () => {
       theme: "dark",
     },
   };
+
   const seriessalesoverview = [
     {
-      name: "Ample Admin",
-      data: [355, 390, 300, 350, 390, 180, 355, 390, 300, 350, 390, 180],
+      name: "Total Sales",
+      data: salesData.map((item) => item.totalAmount),
     },
     {
-      name: "Pixel Admin",
-      data: [280, 250, 325, 215, 250, 310, 280, 250, 325, 215, 250, 310],
+      name: "Orders Count",
+      data: salesData.map((item) => item.ordersCount),
     },
   ];
+
   return (
-    <BaseCard title="Sales Overview">
-      <Chart
-        options={optionssalesoverview}
-        series={seriessalesoverview}
-        type="bar"
-        height="295px"
-      />
-    </BaseCard>
+    <Card>
+      <CardContent>
+        <Typography variant="h6" component="h6" gutterBottom>
+          Sales Overview
+        </Typography>
+        <Box>
+          <Chart
+            options={optionssalesoverview}
+            series={seriessalesoverview}
+            type="bar"
+            height="295px"
+          />
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 

@@ -106,7 +106,7 @@ const Orders = () => {
                                                 Size:
                                                 <p className="text-purple-900 text-xs title-font font-medium ml-1">{product.size}</p>
                                             </h1>
-                                            {product.variant !== "Standard" && product.variant && (
+                                            {product.variant !== "Standard" && (
                                                 <h1 className="flex text-gray-500 text-xs title-font font-medium">
                                                     Color:
                                                     <p className="text-purple-900 text-xs title-font font-medium ml-1">{product.variant}</p>

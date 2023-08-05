@@ -67,7 +67,7 @@ const MyOrder = ({ order, clearCart }) => {
                               Size:
                               <p className="text-purple-900 text-xs title-font font-medium mb-1 ml-1">{products[Key].size}</p>
                             </h1>
-                            {products[Key].variant !== "Standard" && products[Key].variant && (
+                            {products[Key].variant !== "Standard" && (
                               <h1 className="flex text-gray-500 text-xs title-font font-medium mb-1">
                                 Color:
                                 <p className="text-purple-900 text-xs title-font font-medium mb-1 ml-1">{products[Key].variant}</p>

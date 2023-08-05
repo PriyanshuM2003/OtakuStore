@@ -3,7 +3,6 @@ import FeatherIcon from "feather-icons-react";
 import { IconButton, Input, Box, Drawer } from "@mui/material";
 
 const SearchDD = () => {
-  // drawer top
   const [showDrawer2, setShowDrawer2] = useState(false);
 
   const handleDrawerClose2 = () => {

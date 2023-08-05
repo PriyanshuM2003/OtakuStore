@@ -4,7 +4,7 @@ import Product from "../models/Product"
 import mongoose from "mongoose";
 import Head from 'next/head';
 
-const SearchPage = ({ products }) => {
+const SearchPage = ({ products,tags }) => {
 
     return (
         <>
@@ -22,7 +22,12 @@ const SearchPage = ({ products }) => {
                                         </Head>
                                         <h1 className="text-2xl text-center py-4 md:flex md:items-baseline justify-between inline-block border-b border-gray-200 pb-4">Search results for:&nbsp;
                                             <span className="text-purple-600 font-semibold">
-                                                {`"${products[item].tags}"`}
+                                                {tags.map((tag, index) => (
+                                                    <React.Fragment key={index}>
+                                                        {index > 0 && ', '}
+                                                        {`"${tag}"`}
+                                                    </React.Fragment>
+                                                ))}
                                             </span>
                                         </h1>
                                         <div className="lg:w-52 md:w-1/2 p-4
@@ -58,12 +63,13 @@ export async function getServerSideProps(context) {
 
     let products = [];
     if (tags.length > 0) {
-        products = await Product.find({ tags: { $in: tags } });
+        products = await Product.find({ tags: { $all: tags } });
     }
 
     return {
         props: {
             products: JSON.parse(JSON.stringify(products)),
+            tags: tags,
         },
     };
 }

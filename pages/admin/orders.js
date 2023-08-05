@@ -11,16 +11,25 @@ import mongoose from 'mongoose';
 import { useEffect } from "react";
 import Router from 'next/router';
 
-const Orders = ({ order }) => {
+const Orders = ({ orders }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const router = Router
+  const router = Router;
+
   useEffect(() => {
     if (!localStorage.getItem('admin')) {
       router.push('/')
     }
   }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
+  if (!orders) {
+    return null;
+  }
 
 
   return (
@@ -38,15 +47,15 @@ const Orders = ({ order }) => {
         <FullLayout>
           <Grid container spacing={0}>
             <Grid item xs={12} lg={12}>
-              <ViewOrders orders={order} currentPage={currentPage} itemsPerPage={itemsPerPage} />
+              <ViewOrders orders={orders} currentPage={currentPage} itemsPerPage={itemsPerPage} />
             </Grid>
           </Grid>
           <Grid container spacing={0}>
-            <Grid item xs={12} lg={12}>
+            <Grid item xs={12} lg={12} display='flex' justifyContent="center">
               <BaseCard >
                 <Stack spacing={2}>
                   <Pagination
-                    count={Math.ceil(order.length / itemsPerPage)}
+                    count={Math.ceil(orders.length / itemsPerPage)}
                     color="secondary"
                     page={currentPage}
                     onChange={(event, page) => setCurrentPage(page)}
@@ -71,7 +80,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      order: JSON.parse(JSON.stringify(orders))
+      orders: JSON.parse(JSON.stringify(orders))
     }
 
   }

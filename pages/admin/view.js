@@ -13,12 +13,17 @@ import Router from 'next/router';
 const View = ({ products }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
-    const router = Router
+    const router = Router;
+
     useEffect(() => {
         if (!localStorage.getItem('admin')) {
             router.push('/')
         }
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [currentPage]);
 
     const updateProduct = async (updatedProducts) => {
         try {
@@ -59,7 +64,7 @@ const View = ({ products }) => {
                         </Grid>
                     </Grid>
                     <Grid container spacing={0}>
-                        <Grid item xs={12} lg={12}>
+                        <Grid item xs={12} lg={12} display='flex' justifyContent="center">
                             <BaseCard >
                                 <Stack spacing={2}>
                                     <Pagination
