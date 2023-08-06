@@ -524,10 +524,8 @@ const AddProduct = () => {
                 <br />
                 <Button
                     onClick={submitForm}
-                    scrollToTop
                     variant="outlined"
-                    mt={2}
-                >
+                    mt={2}>
                     Add
                 </Button>
             </BaseCard>

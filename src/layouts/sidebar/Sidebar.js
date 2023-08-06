@@ -41,7 +41,7 @@ const Sidebar = ({ isMobileSidebarOpen, onSidebarClose, isSidebarOpen }) => {
         <List>
           {Menuitems.map((item, index) => (
             <List component="li" disablePadding key={item.title}>
-              <NextLink href={item.href}>
+              <NextLink href={item.href} legacyBehavior>
                 <ListItem
                   onClick={() => handleClick(index)}
                   button

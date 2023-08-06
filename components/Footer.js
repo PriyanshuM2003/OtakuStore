@@ -8,10 +8,12 @@ const Footer = () => {
       <footer className="bg-purple-800">
         <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-            <Link href={"/"}>
-              <a className="flex title-font font-medium items-center md:justify-start justify-center">
-                <h1 className={styles.FooterH1}>OtakuStore.com</h1>
-              </a>
+            <Link
+              href={"/"}
+              className="flex title-font font-medium items-center md:justify-start justify-center">
+
+              <h1 className={styles.FooterH1}>OtakuStore.com</h1>
+
             </Link>
             <p className="mt-2 text-sm text-gray-200">Create your own Isekai world with OtakuStore.com</p>
           </div>
@@ -20,43 +22,43 @@ const Footer = () => {
               <h2 className="title-font font-medium text-gray-400 tracking-widest text-sm mb-3">SHOP</h2>
               <nav className="list-none mb-10">
                 <li>
-                  <Link href={'/tshirts'}>
-                    <a className="text-gray-200 hover:text-yellow-400">T-Shirts</a>
+                  <Link href={'/tshirts'} className="text-gray-200 hover:text-yellow-400">
+                    T-Shirts
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/actionfigs'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Action Figures</a>
+                  <Link href={'/actionfigs'} className="text-gray-200 hover:text-yellow-400">
+                    Action Figures
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/costumes'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Costumes</a>
+                  <Link href={'/costumes'} className="text-gray-200 hover:text-yellow-400">
+                    Costumes
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/replicas'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Replicas</a>
+                  <Link href={'/replicas'} className="text-gray-200 hover:text-yellow-400">
+                    Replicas
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/pillows'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Pillows</a>
+                  <Link href={'/pillows'} className="text-gray-200 hover:text-yellow-400">
+                    Pillows
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/bedsheets'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Bedsheets</a>
+                  <Link href={'/bedsheets'} className="text-gray-200 hover:text-yellow-400">
+                    Bedsheets
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/stickers'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Stickers</a>
+                  <Link href={'/stickers'} className="text-gray-200 hover:text-yellow-400">
+                    Stickers
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/posters'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Posters</a>
+                  <Link href={'/posters'} className="text-gray-200 hover:text-yellow-400">
+                    Posters
                   </Link>
                 </li>
               </nav>
@@ -65,23 +67,23 @@ const Footer = () => {
               <h2 className="title-font font-medium text-gray-400 tracking-widest text-sm mb-3">ABOUT</h2>
               <nav className="list-none mb-10">
                 <li>
-                  <Link href={'/contact'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Contact Us</a>
+                  <Link href={'/contact'} className="text-gray-200 hover:text-yellow-400">
+                    Contact Us
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/about'}>
-                    <a className="text-gray-200 hover:text-yellow-400">About Us</a>
+                  <Link href={'/about'} className="text-gray-200 hover:text-yellow-400">
+                    About Us
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Careers</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    Careers
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Corporate Information</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    Corporate Information
                   </Link>
                 </li>
               </nav>
@@ -90,28 +92,28 @@ const Footer = () => {
               <h2 className="title-font font-medium text-gray-400 tracking-widest text-sm mb-3">HELP</h2>
               <nav className="list-none mb-10">
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Payments</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    Payments
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Shipping</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    Shipping
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Cancellation & Returns</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    Cancellation & Returns
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">FAQ</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    FAQ
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Report Infringement</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    Report Infringement
                   </Link>
                 </li>
               </nav>
@@ -120,23 +122,23 @@ const Footer = () => {
               <h2 className="title-font font-medium text-gray-400 tracking-widest text-sm mb-3">POLICY</h2>
               <nav className="list-none mb-10">
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Return Policy</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    Return Policy
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Terms of Use</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    Terms of Use
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Security</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    Security
                   </Link>
                 </li>
                 <li>
-                  <Link href={'/'}>
-                    <a className="text-gray-200 hover:text-yellow-400">Privacy</a>
+                  <Link href={'/'} className="text-gray-200 hover:text-yellow-400">
+                    Privacy
                   </Link>
                 </li>
               </nav>
@@ -176,7 +178,7 @@ const Footer = () => {
         </div>
       </footer >
     </div >
-  )
+  );
 }
 
 export default Footer

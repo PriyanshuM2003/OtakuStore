@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/future/image'
+import Image from 'next/image';
 import styles from '../styles/Home.module.css'
 import Carousel from './carousel';
 import Description from './description';
@@ -14,7 +14,7 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          <Image className={styles.mainImg} src="/Picture2.jpg" width={1519} height={665} layout='raw' alt="Main Image" />
+          <Image className={styles.mainImg} src="/Picture2.jpg" width={1519} height={665} alt="Main Image" />
         </div>
         <section className={styles.contentBody}>
           <div className="container px-5 py-16 mx-auto">

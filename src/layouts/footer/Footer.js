@@ -7,7 +7,7 @@ const Footer = () => {
       <Typography>
         © 2023 All rights reserved by{" "}
         <Link href="/">
-          <a>OtakuStore.com</a>
+          OtakuStore.com
         </Link>{" "}
       </Typography>
     </Box>
