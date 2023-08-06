@@ -9,6 +9,14 @@ import {
     Button,
 } from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+
+const createEmotionCache = () => {
+    return createCache({ key: 'css', prepend: true });
+};
+
+const cache = createEmotionCache();
 
 const AddImage = () => {
     const [form, setForm] = useState({
@@ -84,105 +92,107 @@ const AddImage = () => {
     };
 
     return (
-        <>
-            <BaseCard title="Add Product">
-                <Stack spacing={3}>
-                    <FormLabel htmlFor="category">Category</FormLabel>
-                    <FormGroup className='flex flex-row justify-start items-center'>
-                        <FormControlLabel
-                            control={<Radio
-                                checked={!!form.category['T-Shirt']}
-                                name="category-T-Shirt"
-                                value="T-Shirt"
-                                onChange={handleChange}
+        <CacheProvider value={cache}>
+            <>
+                <BaseCard title="Add Product">
+                    <Stack spacing={3}>
+                        <FormLabel htmlFor="category">Category</FormLabel>
+                        <FormGroup className='flex flex-row justify-start items-center'>
+                            <FormControlLabel
+                                control={<Radio
+                                    checked={!!form.category['T-Shirt']}
+                                    name="category-T-Shirt"
+                                    value="T-Shirt"
+                                    onChange={handleChange}
+                                />
+                                }
+                                label="T-Shirt"
                             />
-                            }
-                            label="T-Shirt"
-                        />
-                        <FormControlLabel
-                            control={<Radio
-                                checked={!!form.category['Action Figure']}
-                                name="category-Action Figure"
-                                value="Action Figure"
-                                onChange={handleChange}
+                            <FormControlLabel
+                                control={<Radio
+                                    checked={!!form.category['Action Figure']}
+                                    name="category-Action Figure"
+                                    value="Action Figure"
+                                    onChange={handleChange}
+                                />
+                                }
+                                label="Action Figure"
                             />
-                            }
-                            label="Action Figure"
-                        />
-                        <FormControlLabel
-                            control={<Radio
-                                checked={!!form.category['Costume']}
-                                name="category-Costume"
-                                value="Costume"
-                                onChange={handleChange}
+                            <FormControlLabel
+                                control={<Radio
+                                    checked={!!form.category['Costume']}
+                                    name="category-Costume"
+                                    value="Costume"
+                                    onChange={handleChange}
+                                />
+                                }
+                                label="Costume"
                             />
-                            }
-                            label="Costume"
-                        />
-                        <FormControlLabel
-                            control={<Radio
-                                checked={!!form.category['Replica']}
-                                name="category-Replica"
-                                value="Replica"
-                                onChange={handleChange}
+                            <FormControlLabel
+                                control={<Radio
+                                    checked={!!form.category['Replica']}
+                                    name="category-Replica"
+                                    value="Replica"
+                                    onChange={handleChange}
+                                />
+                                }
+                                label="Replica"
                             />
-                            }
-                            label="Replica"
-                        />
-                        <FormControlLabel
-                            control={<Radio
-                                checked={!!form.category['Pillow']}
-                                name="category-Pillow"
-                                value="Pillow"
-                                onChange={handleChange}
+                            <FormControlLabel
+                                control={<Radio
+                                    checked={!!form.category['Pillow']}
+                                    name="category-Pillow"
+                                    value="Pillow"
+                                    onChange={handleChange}
+                                />
+                                }
+                                label="Pillow"
                             />
-                            }
-                            label="Pillow"
-                        />
-                        <FormControlLabel
-                            control={<Radio
-                                checked={!!form.category['Bedsheet']}
-                                name="category-Bedsheet"
-                                value="Bedsheet"
-                                onChange={handleChange}
+                            <FormControlLabel
+                                control={<Radio
+                                    checked={!!form.category['Bedsheet']}
+                                    name="category-Bedsheet"
+                                    value="Bedsheet"
+                                    onChange={handleChange}
+                                />
+                                }
+                                label="Bedsheet"
                             />
-                            }
-                            label="Bedsheet"
-                        />
-                        <FormControlLabel
-                            control={<Radio
-                                checked={!!form.category['Sticker']}
-                                name="category-Sticker"
-                                value="Sticker"
-                                onChange={handleChange}
+                            <FormControlLabel
+                                control={<Radio
+                                    checked={!!form.category['Sticker']}
+                                    name="category-Sticker"
+                                    value="Sticker"
+                                    onChange={handleChange}
+                                />
+                                }
+                                label="Sticker"
                             />
-                            }
-                            label="Sticker"
-                        />
-                        <FormControlLabel
-                            control={<Radio
-                                checked={!!form.category['Poster']}
-                                name="category-Poster"
-                                value="Poster"
-                                onChange={handleChange}
+                            <FormControlLabel
+                                control={<Radio
+                                    checked={!!form.category['Poster']}
+                                    name="category-Poster"
+                                    value="Poster"
+                                    onChange={handleChange}
+                                />
+                                }
+                                label="Poster"
                             />
-                            }
-                            label="Poster"
-                        />
-                    </FormGroup>
-                    <TextField value={form.img}
-                        onChange={handleInputChange} name="img" label="Image URL" variant="outlined" />
-                </Stack>
-                <br />
-                <Button
-                    onClick={submitForm}
-                    scrollToTop
-                    variant="outlined"
-                    mt={2}>
-                    Upload
-                </Button>
-            </BaseCard>
-        </>
+                        </FormGroup>
+                        <TextField value={form.img}
+                            onChange={handleInputChange} name="img" label="Image URL" variant="outlined" />
+                    </Stack>
+                    <br />
+                    <Button
+                        onClick={submitForm}
+                        scrollToTop
+                        variant="outlined"
+                        mt={2}>
+                        Upload
+                    </Button>
+                </BaseCard>
+            </>
+        </CacheProvider>
     )
 }
 

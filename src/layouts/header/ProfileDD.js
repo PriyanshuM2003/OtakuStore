@@ -46,7 +46,6 @@ const ProfileDD = () => {
       body: JSON.stringify(data),
     })
     let res = await gAdmin.json()
-    console.log(res);
     setName(res.name)
     setEmail(res.email)
     setPhone(res.phone)
