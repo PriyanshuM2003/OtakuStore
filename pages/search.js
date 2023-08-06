@@ -8,10 +8,22 @@ const SearchPage = ({ products, tags }) => {
 
     return <>
         <section className='min-h-screen text-gray-700 body-font'>
-            <div className="bg-white mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="container px-16 py-14 mx-auto">
-                    <div className="flex flex-wrap -m-4 justify-center">
-                        {Object.keys(products).length === 0 && <p>Sorry! All items are currently out of stock.</p>}
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="md:flex md:items-baseline justify-center inline-block border-b border-gray-200 pb-4 pt-12">
+                    <h1 className="text-2xl text-center">Search results for:&nbsp;
+                        <span className="text-purple-600 font-semibold">
+                            {tags.map((tag, index) => (
+                                <React.Fragment key={index}>
+                                    {index > 0 && ', '}
+                                    {`"${tag}"`}
+                                </React.Fragment>
+                            ))}
+                        </span>
+                    </h1>
+                </div>
+                <div className="container px-16 py-8 mx-auto">
+                    <div className="flex flex-wrap justify-center">
+                        {Object.keys(products).length === 0 && <p>Sorry! Search result not found.</p>}
                         {Object.keys(products).map((item) => {
                             return (
                                 <div key={products[item]._id}>
@@ -19,19 +31,9 @@ const SearchPage = ({ products, tags }) => {
                                         <title>{`OtakuStore- Search=${products[item].tags}`}</title>
                                         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
                                     </Head>
-                                    <h1 className="text-2xl text-center py-4 md:flex md:items-baseline justify-between inline-block border-b border-gray-200 pb-4">Search results for:&nbsp;
-                                        <span className="text-purple-600 font-semibold">
-                                            {tags.map((tag, index) => (
-                                                <React.Fragment key={index}>
-                                                    {index > 0 && ', '}
-                                                    {`"${tag}"`}
-                                                </React.Fragment>
-                                            ))}
-                                        </span>
-                                    </h1>
                                     <Link passHref={true} href={`/product/${products[item].slug}`} legacyBehavior>
-                                        <div className="lg:w-52 md:w-1/2 p-4
-                                        flex flex-row flex-wrap justify-center py-2 w-full cursor-pointer hover:shadow-slate-300 shadow-lg m-auto mt-6 hover:shadow-xl rounded-lg overflow-hidden">
+                                        <div className="lg:w-52 md:w-1/2 p-4 mx-4
+                                        flex flex-row flex-wrap justify-center py-2 w-full h-full cursor-pointer hover:shadow-slate-300 shadow-lg m-auto mt-6 hover:shadow-xl rounded-lg overflow-hidden">
                                             <div className="block rounded overflow-hidden">
                                                 <img alt="ecommerce" className="object-cover object-center w-full h-auto block" src={products[item].img} />
                                             </div>
@@ -49,8 +51,54 @@ const SearchPage = ({ products, tags }) => {
                 </div>
             </div>
         </section>
+        {/* <section className='min-h-screen text-gray-700 body-font'>
+            <div className="bg-white mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="container px-16 py-12 mx-auto">
+                    <div className="flex justify-center">
+                        {Object.keys(products).length === 0 && <p>Sorry! All items are currently out of stock.</p>}
+                        <h1 className="text-2xl text-center py-4 md:flex md:items-baseline justify-between inline-block border-b border-gray-200 pb-4">Search results for:&nbsp;
+                            <span className="text-purple-600 font-semibold">
+                                {tags.map((tag, index) => (
+                                    <React.Fragment key={index}>
+                                        {index > 0 && ', '}
+                                        {`"${tag}"`}
+                                    </React.Fragment>
+                                ))}
+                            </span>
+                        </h1>
+                        <div className="flex container px-16 py-10 mx-auto flex-wrap -m-4 justify-center">
+                            {Object.keys(products).map((item) => {
+                                return (
+                                    <div key={products[item]._id}>
+                                        <Head>
+                                            <title>{`OtakuStore- Search=${products[item].tags}`}</title>
+                                            <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+                                        </Head>
+                                        <Link passHref={true} href={`/product/${products[item].slug}`} legacyBehavior>
+                                            <div className="lg:w-52 md:w-1/2 p-4
+                                        flex flex-row flex-wrap justify-center py-2 w-full cursor-pointer hover:shadow-slate-300 shadow-lg m-auto mt-6 hover:shadow-xl rounded-lg overflow-hidden">
+                                                <div className="block rounded overflow-hidden">
+                                                    <img alt="ecommerce" className="object-cover object-center w-full h-auto block" src={products[item].img} />
+                                                </div>
+                                                <div className="mt-4 text-center">
+                                                    <h3 className="text-gray-800 text-xs tracking-widest title-font mb-1">{products[item].category}</h3>
+                                                    <h2 className="text-purple-900 title-font font-bold text-lg">{products[item].title}</h2>
+                                                    <p className="mt-1 text-purple-800 text-lg font-bold">₹{products[item].price}</p>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> */}
     </>;
 }
+
+export default SearchPage;
 
 export async function getServerSideProps(context) {
 
@@ -82,5 +130,3 @@ export async function getServerSideProps(context) {
         },
     };
 }
-
-export default SearchPage
