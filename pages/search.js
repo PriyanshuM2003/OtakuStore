@@ -32,10 +32,9 @@ const SearchPage = ({ products, tags }) => {
                                         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
                                     </Head>
                                     <Link passHref={true} href={`/product/${products[item].slug}`} legacyBehavior>
-                                        <div className="lg:w-52 md:w-1/2 p-4 mx-4
-                                        flex flex-row flex-wrap justify-center py-2 w-full h-full cursor-pointer hover:shadow-slate-300 shadow-lg m-auto mt-6 hover:shadow-xl rounded-lg overflow-hidden">
+                                        <div className="lg:w-56 md:w-1/2 p-4 w-full h-96 cursor-pointer hover:shadow-slate-300 shadow-lg m-3 hover:shadow-xl rounded-lg overflow-hidden">
                                             <div className="block rounded overflow-hidden">
-                                                <img alt="ecommerce" className="object-cover object-center w-full h-auto block" src={products[item].img} />
+                                                <img alt="ecommerce" className="object-cover object-center w-full h-60 block" src={products[item].img} />
                                             </div>
                                             <div className="mt-4 text-center">
                                                 <h3 className="text-gray-800 text-xs tracking-widest title-font mb-1">{products[item].category}</h3>
