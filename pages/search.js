@@ -66,9 +66,18 @@ export async function getServerSideProps(context) {
         products = await Product.find({ tags: { $all: tags } });
     }
 
+    const uniqueProducts = [];
+    const imageSet = new Set();
+    products.forEach((product) => {
+        if (!imageSet.has(product.img)) {
+            uniqueProducts.push(product);
+            imageSet.add(product.img);
+        }
+    });
+
     return {
         props: {
-            products: JSON.parse(JSON.stringify(products)),
+            products: JSON.parse(JSON.stringify(uniqueProducts)),
             tags: tags,
         },
     };
