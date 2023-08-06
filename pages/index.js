@@ -10,7 +10,7 @@ export default function Home() {
       <Head>
         <title>Otaku Store - A store for weebs</title>
         <meta name="description" content="Otaku Store - A store for weebs" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/store.png" />
       </Head>
       <main>
         <div>
