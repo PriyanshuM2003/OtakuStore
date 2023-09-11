@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Typography,
   Table,
@@ -9,11 +9,16 @@ import {
   TableHead,
   TableRow,
   TextField,
-  Button
+  Button,
 } from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
 
-const ViewProduct = ({ products, currentPage, itemsPerPage, updateProduct }) => {
+const ViewProduct = ({
+  products,
+  currentPage,
+  itemsPerPage,
+  updateProduct,
+}) => {
   const [updatedProducts, setUpdatedProducts] = useState([]);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -49,7 +54,7 @@ const ViewProduct = ({ products, currentPage, itemsPerPage, updateProduct }) => 
   const handleUpdateProduct = async () => {
     try {
       const response = await updateProduct(updatedProducts);
-      toast.success('Product Updated Successfully!', {
+      toast.success("Product Updated Successfully!", {
         position: "top-center",
         autoClose: 1000,
         hideProgressBar: false,
@@ -126,13 +131,14 @@ const ViewProduct = ({ products, currentPage, itemsPerPage, updateProduct }) => 
                   sx={{
                     fontSize: "15px",
                     fontWeight: "500",
-                  }}>
+                  }}
+                >
                   {product._id}
                 </Typography>
               </TableCell>
               <TableCell
                 sx={{
-                  width: "20rem"
+                  width: "20rem",
                 }}
               >
                 <Typography
@@ -140,15 +146,25 @@ const ViewProduct = ({ products, currentPage, itemsPerPage, updateProduct }) => 
                     fontSize: "15px",
                     fontWeight: "500",
                   }}
-                  className="flex flex-row justify-start items-center" color="Textprimary" variant="h6">
-                  <img className="mr-4" style={{ height: '3rem' }} src={product.img} alt={product.title} />
+                  className="flex flex-row justify-start items-center"
+                  color="Textprimary"
+                  variant="h6"
+                >
+                  <img
+                    className="mr-4"
+                    style={{ height: "3rem" }}
+                    src={product.img}
+                    alt={product.title}
+                  />
                   <TextField
                     sx={{
                       width: "100%",
                     }}
                     variant="outlined"
                     value={product.title}
-                    onChange={(event) => handleInputChange(event, product._id, "title")}
+                    onChange={(event) =>
+                      handleInputChange(event, product._id, "title")
+                    }
                   />
                 </Typography>
               </TableCell>
@@ -166,7 +182,9 @@ const ViewProduct = ({ products, currentPage, itemsPerPage, updateProduct }) => 
                     fontSize: "15px",
                     fontWeight: "500",
                   }}
-                  color="textSecondary" variant="h6">
+                  color="textSecondary"
+                  variant="h6"
+                >
                   {product.size} / {product.color}
                 </Typography>
               </TableCell>
@@ -178,29 +196,35 @@ const ViewProduct = ({ products, currentPage, itemsPerPage, updateProduct }) => 
                   }}
                   display="flex"
                   flexDirection={"column"}
-                  color="textSecondary" variant="h6">
+                  color="textSecondary"
+                  variant="h6"
+                >
                   <TextField
                     sx={{
                       width: "40%",
                     }}
                     variant="outlined"
                     value={product.availableQty}
-                    onChange={(event) => handleInputChange(event, product._id, "availableQty")}
+                    onChange={(event) =>
+                      handleInputChange(event, product._id, "availableQty")
+                    }
                   />
-
                 </Typography>
               </TableCell>
               <TableCell
                 sx={{
                   display: "flex",
-                  alignItems: "center"
-                }}>
+                  alignItems: "center",
+                }}
+              >
                 <Typography
                   sx={{
                     fontSize: "15px",
                     fontWeight: "500",
                   }}
-                  variant="h6">₹
+                  variant="h6"
+                >
+                  ₹
                 </Typography>
                 <TextField
                   sx={{
@@ -208,13 +232,13 @@ const ViewProduct = ({ products, currentPage, itemsPerPage, updateProduct }) => 
                   }}
                   variant="outlined"
                   value={product.price}
-                  onChange={(event) => handleInputChange(event, product._id, "price")}
+                  onChange={(event) =>
+                    handleInputChange(event, product._id, "price")
+                  }
                 />
               </TableCell>
               <TableCell>
-                <Button
-                  variant="outlined"
-                  onClick={handleUpdateProduct}>
+                <Button variant="outlined" onClick={handleUpdateProduct}>
                   Update
                 </Button>
               </TableCell>
