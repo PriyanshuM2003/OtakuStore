@@ -37,7 +37,7 @@ const MyOrder = ({ order, clearCart }) => {
         />
       </Head>
       <section className="min-h-screen overflow-hidden">
-        <div className="container px-5 py-20 mx-auto">
+        <div className="container px-5 py-10 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap justify-center items-center">
             <div className="lg:w-4/5 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
               <div className="sideCart">
@@ -130,6 +130,10 @@ const MyOrder = ({ order, clearCart }) => {
                 </div>
               </div>
               <div className="container mx-auto px-4 py-8">
+                <h1 className="text-purple-800 font-bold text-xl">
+                  Delivery Status:
+                </h1>
+                <br />
                 <div className="flex justify-center items-center space-x-4">
                   <ol className="flex items-center w-full">
                     {deliveryStatuses.map((status, index) => (
