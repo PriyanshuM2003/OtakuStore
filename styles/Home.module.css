@@ -1,18 +1,18 @@
 .contentBody {
-    background: linear-gradient(to right, #e91e63, #673ab7);
+  background: linear-gradient(to right, #e91e63, #673ab7);
 }
 
 .mainImg {
-    height: 100vh;
-    width: 100%;
-    object-position: center;
-    object-fit: cover;
+  height: 100vh;
+  width: 100%;
+  object-position: center;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 600px) {
-    .mainImg {
-        height: 450px;
-        width: 450px;
-        /* object-position: center; */
-    }
+  .mainImg {
+    height: 450px;
+    width: 450px;
+    /* object-position: center; */
+  }
 }

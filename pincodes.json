@@ -1,18 +1,6 @@
 {
-    "110053": [
-        "Delhi",
-        "Delhi"
-    ],
-    "560017": [
-        "Bangalore",
-        "Karnataka"
-    ],
-    "400076": [
-        "Mumbai",
-        "Maharashtra"
-    ],
-    "224123": [
-        "Ayodhya",
-        "Uttar Pradesh"
-    ]
+  "110053": ["Delhi", "Delhi"],
+  "560017": ["Bangalore", "Karnataka"],
+  "400076": ["Mumbai", "Maharashtra"],
+  "224123": ["Ayodhya", "Uttar Pradesh"]
 }

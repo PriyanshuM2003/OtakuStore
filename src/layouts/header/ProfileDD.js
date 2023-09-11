@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FeatherIcon from "feather-icons-react";
-import { ToastContainer, toast } from 'react-toastify';
-import Router from 'next/router';
+import { ToastContainer, toast } from "react-toastify";
+import Router from "next/router";
 import {
   Box,
   Menu,
@@ -15,10 +15,10 @@ import {
 } from "@mui/material";
 const ProfileDD = () => {
   const [anchorEl4, setAnchorEl4] = React.useState(null);
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [admin, setAdmin] = useState({ value: null })
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [admin, setAdmin] = useState({ value: null });
 
   const handleClick4 = (event) => {
     setAnchorEl4(event.currentTarget);
@@ -27,38 +27,38 @@ const ProfileDD = () => {
   const handleClose4 = () => {
     setAnchorEl4(null);
   };
-  const router = Router
+  const router = Router;
   useEffect(() => {
-    const admin = JSON.parse(localStorage.getItem('admin'))
+    const admin = JSON.parse(localStorage.getItem("admin"));
     if (admin && admin.token) {
-      setAdmin(admin)
-      fetchData(admin.token)
+      setAdmin(admin);
+      fetchData(admin.token);
     }
-  }, [])
+  }, []);
 
   const fetchData = async (token) => {
-    let data = { token: token }
+    let data = { token: token };
     let gAdmin = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getadmin`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    })
-    let res = await gAdmin.json()
-    setName(res.name)
-    setEmail(res.email)
-    setPhone(res.phone)
-  }
+    });
+    let res = await gAdmin.json();
+    setName(res.name);
+    setEmail(res.email);
+    setPhone(res.phone);
+  };
 
   if (!admin) {
     return null;
   }
 
   const adminPLogout = () => {
-    localStorage.removeItem('admin')
-    setAdmin({ value: null })
-    toast.success('You are successfully logged out!', {
+    localStorage.removeItem("admin");
+    setAdmin({ value: null });
+    toast.success("You are successfully logged out!", {
       position: "top-center",
       autoClose: 1000,
       hideProgressBar: false,
@@ -68,11 +68,10 @@ const ProfileDD = () => {
       progress: undefined,
     });
     setTimeout(() => {
-      router.push('/');
+      router.push("/");
       window.location.reload();
     }, 1000);
-  }
-
+  };
 
   return (
     <>
@@ -83,7 +82,17 @@ const ProfileDD = () => {
         aria-haspopup="true"
         onClick={handleClick4}
       >
-        <ToastContainer position="top-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Box display="flex" alignItems="center">
           {/* <Image
             src={userimg}
@@ -160,7 +169,12 @@ const ProfileDD = () => {
           <Divider />
           <Box p={2}>
             <Link to="/">
-              <Button onClick={adminPLogout} fullWidth variant="outlined" color="primary">
+              <Button
+                onClick={adminPLogout}
+                fullWidth
+                variant="outlined"
+                color="primary"
+              >
                 Logout
               </Button>
             </Link>

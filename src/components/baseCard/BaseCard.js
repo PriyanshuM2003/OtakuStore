@@ -1,11 +1,6 @@
 import React from "react";
 
-import {
-  Card,
-  CardContent,
-  Box,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, Box, Typography } from "@mui/material";
 
 const BaseCard = (props) => {
   return (

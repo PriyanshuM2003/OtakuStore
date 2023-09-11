@@ -31,7 +31,20 @@ const SalesOverview = ({ orders }) => {
   };
 
   const getMonthIndex = (monthName) => {
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
     return monthNames.indexOf(monthName);
   };
 
@@ -43,7 +56,9 @@ const SalesOverview = ({ orders }) => {
     return getMonthIndex(a.month) - getMonthIndex(b.month);
   });
 
-  const xAxisCategories = sortedSalesData.map((item) => `${item.month} ${item.year}`);
+  const xAxisCategories = sortedSalesData.map(
+    (item) => `${item.month} ${item.year}`
+  );
 
   const maxTotalAmount = Math.max(...salesData.map((item) => item.totalAmount));
   const maxOrdersCount = Math.max(...salesData.map((item) => item.ordersCount));
