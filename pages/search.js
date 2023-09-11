@@ -42,7 +42,7 @@ const SearchPage = ({ products, tags }) => {
                       href={`/product/${products[item].slug}`}
                       legacyBehavior
                     >
-                      <div className="lg:w-56 md:w-1/2 p-4 w-full h-96 cursor-pointer hover:shadow-slate-300 shadow-lg m-3 hover:shadow-xl rounded-lg overflow-hidden">
+                      <div className="flex flex-col justify-between lg:w-56 md:w-1/2 p-4 w-full h-96 cursor-pointer hover:shadow-slate-300 shadow-lg m-3 hover:shadow-xl rounded-lg overflow-hidden">
                         <div className="block rounded overflow-hidden">
                           <img
                             alt="ecommerce"
