@@ -36,7 +36,7 @@ const Navbar = ({ user, admin, logout, adminLogout, cart, addToCart, removeFromC
   };
 
   const handleSearchQueryChange = (event) => {
-    setSearchQuery(event.target.value);
+    setSearchQuery(event.target.value.toLowerCase());
   };
 
   const handleSearchSubmit = (event) => {
@@ -213,4 +213,4 @@ const Navbar = ({ user, admin, logout, adminLogout, cart, addToCart, removeFromC
   </>;
 }
 
-export default Navbar
+export default Navbar;
