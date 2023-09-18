@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 function Carousel() {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,7 +27,6 @@ function Carousel() {
     if (response.ok) {
       const data = await response.json();
       setImages(data);
-      setIsLoading(false);
     } else {
       console.error("Error fetching images");
     }
@@ -55,71 +53,51 @@ function Carousel() {
 
   return (
     <>
-      {isLoading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div role="status">
-            <svg
-              aria-hidden="true"
-              className="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600"
-              viewBox="0 0 100 101"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            ></svg>
-            <span className="sr-only">Loading...</span>
-          </div>
-        </div>
-      ) : (
-        <section>
-          <div className="grid grid-cols-2 md:grid-cols-4 rounded border-2 border-purple-900">
-            {[
-              "T-Shirt",
-              "Action Figure",
-              "Costume",
-              "Replica",
-              "Pillow",
-              "Bedsheet",
-              "Sticker",
-              "Poster",
-            ].map((category) => (
-              <Link
-                key={category}
-                href={categoryHrefs[category]}
-                legacyBehavior
-              >
-                <div className="flex cursor-pointer justify-center items-center flex-col bg-white overflow-hidden border-2 border-gray-300">
-                  <img
-                    className="w-auto h-72 px-2 mt-2 object-cover object-center"
-                    src={
-                      filterImagesByCategory(category)[
-                        currentIndex % filterImagesByCategory(category).length
-                      ]?.img || ""
-                    }
-                    alt={
-                      filterImagesByCategory(category)[
-                        currentIndex % filterImagesByCategory(category).length
-                      ]?.category || ""
-                    }
-                  />
-                  <div className="px-6 py-4">
-                    {filterImagesByCategory(category)[
+      <section>
+        <div className="grid grid-cols-2 md:grid-cols-4 rounded border-2 border-purple-900">
+          {[
+            "T-Shirt",
+            "Action Figure",
+            "Costume",
+            "Replica",
+            "Pillow",
+            "Bedsheet",
+            "Sticker",
+            "Poster",
+          ].map((category) => (
+            <Link key={category} href={categoryHrefs[category]} legacyBehavior>
+              <div className="flex cursor-pointer justify-center items-center flex-col bg-white overflow-hidden border-2 border-gray-300">
+                <img
+                  className="w-auto h-72 px-2 mt-2 object-cover object-center"
+                  src={
+                    filterImagesByCategory(category)[
                       currentIndex % filterImagesByCategory(category).length
-                    ] && (
-                      <div className="font-bold text-4xl text-transparent bg-clip-text bg-gradient-to-b from-purple-900 to-pink-800">
-                        {
-                          filterImagesByCategory(category)[
-                            currentIndex %
-                              filterImagesByCategory(category).length
-                          ].category
-                        }
-                      </div>
-                    )}
-                  </div>
+                    ]?.img || ""
+                  }
+                  alt={
+                    filterImagesByCategory(category)[
+                      currentIndex % filterImagesByCategory(category).length
+                    ]?.category || ""
+                  }
+                />
+                <div className="px-6 py-4">
+                  {filterImagesByCategory(category)[
+                    currentIndex % filterImagesByCategory(category).length
+                  ] && (
+                    <div className="font-bold text-4xl text-transparent bg-clip-text bg-gradient-to-b from-purple-900 to-pink-800">
+                      {
+                        filterImagesByCategory(category)[
+                          currentIndex % filterImagesByCategory(category).length
+                        ].category
+                      }
+                    </div>
+                  )}
                 </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
     </>
   );
 }
