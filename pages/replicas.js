@@ -94,7 +94,7 @@ const Replicas = ({ products }) => {
                         />
                       </div>
                       <div className="mt-4 text-center">
-                        <h3 className="text-gray-800 text-xs tracking-widest title-font mb-1">
+                        <h3 className="text-gray-800 text-xs font-medium tracking-widest title-font mb-1">
                           {currentItems[item].category}
                         </h3>
                         <h2 className="text-purple-900 title-font font-bold text-lg">

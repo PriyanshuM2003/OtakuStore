@@ -99,7 +99,7 @@ const Post = ({ buyNow, addToCart, product, variants, error }) => {
               src={product.img}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-              <h2 className="text-sm title-font text-gray-700 tracking-widest">
+              <h2 className="text-sm font-medium title-font text-gray-700 tracking-widest">
                 Otaku Store {product.category}
               </h2>
               <h1 className="text-purple-900 text-3xl title-font font-medium mb-1">
