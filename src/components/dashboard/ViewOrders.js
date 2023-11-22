@@ -39,7 +39,7 @@ const ViewOrders = ({ orders, currentPage, itemsPerPage, updateOrderS }) => {
     updateOrderS(updatedOrders);
 
     try {
-      const response = await fetch("/api/mailer", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/mailer`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
