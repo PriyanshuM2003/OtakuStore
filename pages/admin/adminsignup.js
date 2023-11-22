@@ -76,6 +76,47 @@ const AdminSignup = () => {
         progress: undefined,
       });
     }
+
+    try {
+      const emailResult = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST}/api/mailer`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            recipient: email,
+            subject: "Welcome Admin to Otaku Store",
+            htmlContent: `<body style="font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <h1 style="font-size: 28px; font-weight: bold; color: #2e3d49; text-align: center;">
+            <span style="color: #673ab7;">OTAKU STORE</span>
+            </h1>
+            
+            <p style="font-size: 18px; color: #2e3d49; text-align: center;">
+            <strong>Welcome Admin to OTAKU STORE!</strong> <br>
+            Thank you for joining as a admin with us.
+            </p>
+            <p style="font-size: 14px; color: #888; text-align: center;">
+            Best Regards,<br>
+            OTAKU STORE Team
+            </p>
+            </div>
+            </body>`,
+          }),
+        }
+      );
+
+      if (emailResult.ok) {
+        console.log("Email sent successfully!");
+      } else {
+        console.error("Failed to send email");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
   };
 
   return (

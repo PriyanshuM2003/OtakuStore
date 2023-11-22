@@ -23,10 +23,12 @@ const ViewOrders = ({ orders, currentPage, itemsPerPage, updateOrderS }) => {
     ? orders.slice(indexOfFirstItem, indexOfLastItem)
     : [];
 
-  const handleChange = (event, orderIndex) => {
+  const handleChange = async (event, orderIndex) => {
     const newDStatus = event.target.value;
     const updatedOrders = [...orders];
     updatedOrders[orderIndex].deliverystatus = newDStatus;
+
+    const recipientEmail = updatedOrders[orderIndex].email;
 
     setDeliveryStatus((prevStatus) => {
       const updatedStatus = [...prevStatus];
@@ -35,6 +37,96 @@ const ViewOrders = ({ orders, currentPage, itemsPerPage, updateOrderS }) => {
     });
 
     updateOrderS(updatedOrders);
+
+    try {
+      const response = await fetch("/api/mailer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          recipient: recipientEmail,
+          subject: `Order Status Update - Order ID: ${updatedOrders[orderIndex].order_id}`,
+          htmlContent: `<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <title>Order Delivery Status</title>
+            <style>
+              body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+              }
+          
+              .container {
+                max-width: 600px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+              }
+          
+              .header {
+                text-align: center;
+                margin-bottom: 30px;
+              }
+          
+              .header h2 {
+                color: #333;
+                margin-bottom: 10px;
+              }
+          
+              .status {
+                text-align: center;
+                margin-bottom: 20px;
+              }
+          
+              .status p {
+                font-size: 18px;
+                color: #673ab7;
+                margin: 5px 0;
+              }
+          
+              .footer {
+                text-align: center;
+                margin-top: 30px;
+                color: #777;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h2>Order Status</h2>
+              </div>
+              <div class="status">
+                <p>Order #${updatedOrders[orderIndex].order_id} has been <strong>${newDStatus}</strong> successfully.</p>
+              </div>
+              <div class="footer">
+                <p>For further assistance, please contact our customer support.</p>
+                <p>Thank you for choosing our service!</p>
+                <p>Sincerely,</p>
+                <p>OTAKU STORE</p>
+              </div>
+            </div>
+          </body>
+          </html>
+          `,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        console.log("Email sent successfully!");
+      } else {
+        console.error("Error sending email:", data.error);
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
   };
 
   const datesAreEqual = (dates1, dates2) => {

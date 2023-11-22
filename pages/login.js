@@ -99,15 +99,15 @@ const Login = () => {
               <h2 className="mt-6 text-center text-3xl font-extrabold text-purple-800">
                 Login to your account
               </h2>
-              <p className="mt-2 text-center text-sm text-gray-600">
+              <h1 className="mt-2 text-center text-sm text-gray-600">
                 Or <br />
                 <Link href={"/signup"} legacyBehavior>
-                  <h1 className="font-bold cursor-pointer text-purple-900 hover:text-purple-700">
+                  <p className="font-bold cursor-pointer text-purple-900 hover:text-purple-700">
                     {" "}
                     Sign-up
-                  </h1>
+                  </p>
                 </Link>
-              </p>
+              </h1>
             </div>
             <form
               onSubmit={handleSubmit}
