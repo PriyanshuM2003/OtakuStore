@@ -92,8 +92,7 @@ const handler = async (req, res) => {
     </html>
     `;
 
-    const baseURL = new URL(`https://${req.headers.host}`);
-    // const baseURL = new URL(`http://${req.headers.host}`);
+    const baseURL = new URL(`http://${req.headers.host}`);
     const mailerURL = new URL("/api/mailer", baseURL);
 
     await fetch(mailerURL.href, {
