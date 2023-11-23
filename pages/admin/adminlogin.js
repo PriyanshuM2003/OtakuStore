@@ -143,13 +143,16 @@ const AdminLogin = () => {
                   />
                 </div>
               </div>
-              {/* <div className="flex items-center justify-between">
-                            <div className="text-sm">
-                                <Link href={'/forgot'}>
-                                    <a className="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
-                                </Link>
-                            </div>
-                        </div> */}
+              <div className="flex items-center justify-between">
+                <div className="text-sm">
+                  <Link href={"/forgot"} legacyBehavior>
+                    <h1 className="font-semibold cursor-pointer text-indigo-600 hover:text-indigo-500">
+                      {" "}
+                      Forgot your password?{" "}
+                    </h1>
+                  </Link>
+                </div>
+              </div>
               <div>
                 <button
                   type="submit"

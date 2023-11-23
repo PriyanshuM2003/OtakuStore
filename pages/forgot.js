@@ -3,6 +3,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { MdAccountCircle, MdLockOutline } from "react-icons/md";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Forgot = () => {
   const router = useRouter();
@@ -30,16 +32,27 @@ const Forgot = () => {
     });
     let res = await send.json();
     if (res.success) {
-      console.log("email sent");
+      toast.success("Email sent for password reset!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+      setEmail("");
     } else {
       console.log("error");
     }
   };
 
   const resetPassword = async () => {
-    if (npassword == cpassword) {
+    if (npassword === cpassword) {
       let data = {
-        npassword,
+        newpassword: npassword,
+        confpassword: cpassword,
+        token: router.query.token,
         sendMail: false,
       };
       let resetP = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/forgot`, {
@@ -51,9 +64,22 @@ const Forgot = () => {
       });
       let res = await resetP.json();
       if (res.success) {
-        console.log("password reset");
+        toast.success("Password reset successful", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          router.push("/login");
+        }, 1000);
+        setNpassword("");
+        setCpassword("");
       } else {
-        console.log("error");
+        console.log("Error during password reset:", res.error);
       }
     } else {
       console.log("error error");
@@ -83,24 +109,37 @@ const Forgot = () => {
       </Head>
       <section className="min-h-screen overflow-hidden">
         <div className="min-h-full flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
+          <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
           <div className="max-w-md w-full space-y-8">
             <div>
               <MdAccountCircle className="mx-auto text-yellow-400 bg-purple-900 rounded-full h-12 w-auto" />
               <h2 className="mt-6 text-center text-3xl font-extrabold text-purple-800">
                 Reset your password
               </h2>
-              <h1 className="mt-2 text-center text-sm text-gray-600">
-                Or <br />
-                <Link href={"/login"} legacyBehavior>
-                  <p className="font-bold cursor-pointer text-purple-900 hover:text-purple-700">
-                    {" "}
-                    Login
-                  </p>
-                </Link>
-              </h1>
+              {!router.query.token && (
+                <h1 className="mt-2 text-center text-sm text-gray-600">
+                  Or <br />
+                  <Link href={"/login"} legacyBehavior>
+                    <p className="font-bold cursor-pointer text-purple-900 hover:text-purple-700">
+                      {" "}
+                      Login
+                    </p>
+                  </Link>
+                </h1>
+              )}
             </div>
             {router.query.token && (
-              <form className="mt-8 space-y-6" action="#" method="POST">
+              <>
                 <div className="rounded-md shadow-sm">
                   <div className="my-2">
                     <input
@@ -140,10 +179,10 @@ const Forgot = () => {
                     <h1 className="text-base lg:mr-40 mr-28">Continue</h1>
                   </button>
                 </div>
-              </form>
+              </>
             )}
             {!router.query.token && (
-              <form className="mt-8 space-y-6" action="#" method="POST">
+              <>
                 <div className="rounded-md shadow-sm">
                   <div className="my-2">
                     <input
@@ -169,7 +208,7 @@ const Forgot = () => {
                     <h1 className="text-base lg:mr-40 mr-28">Continue</h1>
                   </button>
                 </div>
-              </form>
+              </>
             )}
           </div>
         </div>
