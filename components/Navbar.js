@@ -63,12 +63,12 @@ const Navbar = ({
     <>
       <header className={styles.headContainer}>
         <div className={styles.navbar}>
-          <div className="container mx-auto flex flex-wrap p-2 flex-col md:flex-row">
+          <div className="mx-auto flex flex-wrap p-2 flex-col md:flex-row">
             <Link
               href={"/"}
               className="flex title-font font-medium items-center text-xl mb-4 md:mb-0"
             >
-              <h1 className="text-2xl text-gray-200 font-bold hover:text-yellow-400">
+              <h1 className="px-2 text-2xl text-gray-200 font-bold hover:text-yellow-400">
                 OtakuStore
               </h1>
             </Link>
@@ -122,7 +122,10 @@ const Navbar = ({
                 Posters
               </Link>
             </nav>
-
+            <MdSearch
+              className="text-4xl cursor-pointer hover:text-yellow-400 right-36 absolute"
+              onClick={toggleSearchForm}
+            />
             {user.value && (
               <button
                 onMouseOver={() => {
@@ -283,7 +286,7 @@ const Navbar = ({
             <div
               ref={ref}
               className={`sideCart z-20 overflow-y-auto no-scrollbar absolute top-0 right-0 p-12 w-84 h-screen bg-purple-900 transform transition-transform ${
-                sidebar ? "translate-x-0" : "translate-x-full"
+                sidebar ? "translate-x-0" : "hidden"
               } `}
             >
               <h2 className="font-bold absolute text-yellow-400 text-2xl -ml-8 top-4">
@@ -388,16 +391,12 @@ const Navbar = ({
                 )}
               </div>
             </div>
-            <MdSearch
-              className="text-4xl cursor-pointer hover:text-yellow-400 absolute right-52"
-              onClick={toggleSearchForm}
-            />
           </div>
         </div>
 
         {showSearchForm && (
           <form className="flex justify-center" onSubmit={handleSearchSubmit}>
-            <div className="absolute w-1/3 mx-auto mt-2">
+            <div className="absolute md:w-1/3 w-5/6 mx-auto mt-2">
               <input
                 type="search"
                 id="search-dropdown"

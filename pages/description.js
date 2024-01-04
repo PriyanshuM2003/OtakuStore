@@ -23,7 +23,7 @@ function Description() {
                 </div>
               </div>
             </div>
-            <div className="p-4 md:w-1/3">
+            <div className="p-4 w-full md:w-1/3">
               <div className="flex items-center justify-center rounded-lg h-full bg-gray-100 p-4 flex-col">
                 <div className="flex items-center justify-center flex-col mb-3">
                   <FaTruck className="text-5xl text-yellow-500 mb-2" />

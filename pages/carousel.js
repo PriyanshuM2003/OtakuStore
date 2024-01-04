@@ -54,7 +54,7 @@ function Carousel() {
   return (
     <>
       <section>
-        <div className="grid grid-cols-2 md:grid-cols-4 rounded border-2 border-purple-900">
+        <div className="grid grid-cols-1 md:grid-cols-4 rounded border-2 border-purple-900">
           {[
             "T-Shirt",
             "Action Figure",
