@@ -221,7 +221,7 @@ const Footer = () => {
         <div className="bg-purple-900">
           <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
             <p className="text-gray-200 font-bold text-md text-center sm:text-left">
-              © 2022 OtakuStore.com - All Rights Reserved
+              © 2024 OtakuStore.com - All Rights Reserved
             </p>
             <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
               <a className="text-gray-200">
